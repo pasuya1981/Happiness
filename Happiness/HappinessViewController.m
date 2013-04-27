@@ -31,7 +31,17 @@
     _faceView = faceView;
     // overRide faceView setter, connecting "Pinch" gesture defined in FaceView Object
     [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
+    [self.faceView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleHappinessGesture:)]];
     self.faceView.dataSource = self; // set the FaceView delegator to be the controler
+}
+
+- (void)handleHappinessGesture:(UIPanGestureRecognizer *)gesture
+{
+    if ((gesture.state == UIGestureRecognizerStateChanged) || (gesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint translation = [gesture translationInView:self.faceView];
+        self.happiness -= translation.y / 2; // divede by 2 make it less sensitive, minus "-", cause y goes donw when accumulated.
+        [gesture setTranslation:CGPointZero inView:self.faceView];
+    }
 }
 
 // implementate the protocol method (must do)
