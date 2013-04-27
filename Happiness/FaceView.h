@@ -22,6 +22,6 @@
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture; // make gesture public.
 
-@property (nonatomic, weak) IBOutlet id <FaceViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id <FaceViewDataSource> dataSource; // FaceView class only know the method, notice "id"
 
 @end
