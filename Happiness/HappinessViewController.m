@@ -16,7 +16,6 @@
 @end
 
 @implementation HappinessViewController
-
 @synthesize happiness = _happiness;
 @synthesize faceView = _faceView;
 
@@ -29,8 +28,13 @@
 - (void)setFaceView:(FaceView *)faceView
 {
     _faceView = faceView;
-    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:faceView action:@selector(pince:)]];
+    // overRide faceView setter, connecting gesture defined in FaceView Object
+    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
 
 @end
