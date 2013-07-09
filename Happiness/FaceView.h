@@ -8,20 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-@class FaceView; // forward reference, so compiler knows "the under" (FaceView *) of protocol
+// forward reference
+// so compiler knows "the under" (FaceView *) of protocol
+@class FaceView; 
 
 @protocol FaceViewDataSource // delegate
 
-- (float)smileForFaceView:(FaceView *)sender; // FaceView declare later, from this point
-                                              // compiler dosn't know FaceView Class.
+// FaceView declare later, from this point
+// compiler cant read (FaceView *)
+// so need to add "@class FaceView;" on top
+// for compiler to read "(FaceView *)sender;"
+- (float)smileForFaceView:(FaceView *)sender;
+
 @end
 
 @interface FaceView : UIView
 
 @property (nonatomic) CGFloat scale;
 
-- (void)pinch:(UIPinchGestureRecognizer *)gesture; // make gesture public.
+// make gesture public.
+- (void)pinch:(UIPinchGestureRecognizer *)gesture; 
 
-@property (nonatomic, weak) IBOutlet id <FaceViewDataSource> dataSource; // FaceView class only know the method, notice "id"
+// FaceView class only know the method, notice "id"
+@property (nonatomic, weak) IBOutlet id <FaceViewDataSource> dataSource; 
 
 @end

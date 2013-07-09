@@ -62,13 +62,12 @@
 
 - (void)drawCircleAtPoint:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef)context
 {
-    UIGraphicsPushContext(context); // calling to begin
+    UIGraphicsPushContext(context); // call context to begin
     CGContextBeginPath(context);
     CGContextAddArc(context, p.x, p.y, radius, 0, 2*M_PI, YES);
     CGContextStrokePath(context);
-    UIGraphicsPopContext(); // ending
+    UIGraphicsPopContext(); // end contex
 }
-
 
 - (void)drawRect:(CGRect)rect
 {

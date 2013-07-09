@@ -9,7 +9,8 @@
 #import "HappinessViewController.h"
 #import "FaceView.h"
 
-@interface HappinessViewController () <FaceViewDataSource> // delegate the protocol, must do the implementation
+// delegate FaceView protocol, must do implementation
+@interface HappinessViewController () <FaceViewDataSource> 
 
 @property (nonatomic, weak) IBOutlet FaceView *faceView;
 
@@ -32,14 +33,15 @@
     // overRide faceView setter, connecting "Pinch" gesture defined in FaceView Object
     [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
     [self.faceView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleHappinessGesture:)]];
-    self.faceView.dataSource = self; // set the FaceView delegator to be the controler
+    // let controller conform to FaceView protocol
+    self.faceView.dataSource = self; 
 }
 
 - (void)handleHappinessGesture:(UIPanGestureRecognizer *)gesture
 {
     if ((gesture.state == UIGestureRecognizerStateChanged) || (gesture.state == UIGestureRecognizerStateEnded)) {
         CGPoint translation = [gesture translationInView:self.faceView];
-        self.happiness -= translation.y / 2; // divede by 2 make it less sensitive, minus "-", cause y goes donw when accumulated.
+        self.happiness -= translation.y / 2; // devide by 2 make it less sensitive, minus "-", cause y goes donw when accumulated.
         [gesture setTranslation:CGPointZero inView:self.faceView];
     }
 }
